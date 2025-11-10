@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="content="width=device-width, initial-scale=1.0">
+    <title>AFRadio - En Vivo</title>
+    <!-- ⭐️ PWA REQUIREMENT 1: Enlace al manifiesto para iconos e instalación ⭐️ -->
+    <link rel="manifest" href="afradio-manifest.json">
+    
+    <!-- Carga de Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuente Inter de Google Fonts y fondo oscuro */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            
+            /* 1. FONDO INTERACTIVO (Gradiente animado) */
+            background: linear-gradient(-45deg, #111827, #1f2937, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+       
