@@ -131,24 +131,32 @@ footer{margin-top:20px;color:rgba(0,0,0,0.6)}
   </div>
   <p class="sub">la mejor del mundo</p>
 
-  <div class="player">
-   <iframe 
-  src="https://afradio.es/public/afradio/embed?theme=light" 
-  frameborder="0" 
-  allowtransparency="true" 
-  style="width:100%; min-height:180px; border:0; border-radius:12px; overflow:hidden;">
-</iframe>
-   <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
+<div class="player">
+  <audio id="radio" preload="none" crossorigin="anonymous"></audio>
+  
+  <button id="playBtn" class="btn btn-play">▶️ Escuchar en vivo</button>
+  <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
 
+  <div class="visualizer-wrap">
+    <canvas id="visualizer"></canvas>
+  </div>
 
-    <div class="socials">
-      <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
-      <a href="https://tiktok.com/@afradiolatina7" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-      <a href="https://www.instagram.com/afradio2022" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
-      <a href="https://afradio.es/public/afradio/podcasts" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/2504/2504923.png" alt="Podcast"></a>
-    </div>
+  <div class="socials">
+    <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social">
+      <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+    </a>
+    <a href="https://tiktok.com/@afradiolatina7" target="_blank" class="social">
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+    </a>
+    <a href="https://www.instagram.com/afradio2022" target="_blank" class="social">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+    </a>
+    <a href="https://afradio.es/public/afradio/podcasts" target="_blank" class="social">
+      <img src="https://cdn-icons-png.flaticon.com/512/2504/2504923.png" alt="Podcast">
+    </a>
   </div>
 </div>
+
 
 <footer>© AFRadio</footer>
 
@@ -160,43 +168,53 @@ const shareBtn = document.getElementById("shareBtn");
 const canvas = document.getElementById("visualizer");
 let isPlaying = false;
 
-playBtn.addEventListener("click", async ()=>{
-  if(!isPlaying){
-    try{
+// Reproducir o pausar
+playBtn.addEventListener("click", async () => {
+  if (!isPlaying) {
+    try {
       audio.src = STREAM_URL;
-      audio.crossOrigin = "anonymous";
       await audio.play();
       playBtn.textContent = "⏸️ Pausar";
       isPlaying = true;
       startVisualizer();
-    }catch(e){
-      alert("Error al reproducir. Verifica la URL o conexión.");
+    } catch (e) {
+      alert("Error al reproducir. Verifica la conexión o la URL.");
       console.error(e);
     }
-  }else{
+  } else {
     audio.pause();
-    playBtn.textContent = "▶️ Escuchar";
+    playBtn.textContent = "▶️ Escuchar en vivo";
     isPlaying = false;
     stopVisualizer();
   }
 });
 
-shareBtn.addEventListener("click", async ()=>{
-  const data = {title:"AFradio", text:"Escucha AFRadio - la mejor del mundo", url:window.location.href};
-  try{
-    if(navigator.share) await navigator.share(data);
-    else{
-      await navigator.clipboard.writeText(window.location.href);
-      alert("Enlace copiado al portapapeles");
+// Compartir
+if (shareBtn) {
+  shareBtn.addEventListener("click", async () => {
+    const data = {
+      title: "AFRadio",
+      text: "Escucha AFRadio - la mejor del mundo",
+      url: "https://afradio.es/public/afradio"
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(data);
+      } else {
+        await navigator.clipboard.writeText(data.url);
+        alert("Enlace copiado al portapapeles");
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }catch(e){console.log(e);}
-});
+  });
+}
 
-// Visualizador de audio
+// Visualizador
 let audioCtx, analyser, src, rafId;
-function startVisualizer(){
-  if(!audioCtx){
-    audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+function startVisualizer() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     analyser = audioCtx.createAnalyser();
     src = audioCtx.createMediaElementSource(audio);
     src.connect(analyser);
@@ -205,54 +223,45 @@ function startVisualizer(){
   }
   draw();
 }
-function stopVisualizer(){if(rafId) cancelAnimationFrame(rafId);}
-function draw(){
+function stopVisualizer() {
+  if (rafId) cancelAnimationFrame(rafId);
+}
+function draw() {
   const ctx = canvas.getContext("2d");
-  const w = canvas.width = canvas.clientWidth * devicePixelRatio;
-  const h = canvas.height = canvas.clientHeight * devicePixelRatio;
+  const w = (canvas.width = canvas.clientWidth * devicePixelRatio);
+  const h = (canvas.height = canvas.clientHeight * devicePixelRatio);
   const bufferLength = analyser.frequencyBinCount;
   const data = new Uint8Array(bufferLength);
-  function loop(){
+  function loop() {
     rafId = requestAnimationFrame(loop);
     analyser.getByteFrequencyData(data);
-    ctx.clearRect(0,0,w,h);
-    ctx.fillStyle="#000";
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#000";
     const barW = (w / bufferLength) * 2.5;
     let x = 0;
-    for(let i=0;i<bufferLength;i++){
-      const v = data[i]/255;
-      const barH = v*h*0.9;
-      ctx.fillRect(x,h-barH,barW,barH);
+    for (let i = 0; i < bufferLength; i++) {
+      const v = data[i] / 255;
+      const barH = v * h * 0.9;
+      ctx.fillRect(x, h - barH, barW, barH);
       x += barW + 1;
     }
   }
   loop();
 }
-  // Ocultar splash después de animación
+
+// Ocultar splash
 window.addEventListener("load", () => {
   setTimeout(() => {
     const splash = document.getElementById("splash");
     if (splash) splash.style.display = "none";
   }, 2500);
 });
-  // Mostrar metadatos desde Icecast
-async function fetchMetadata() {
-  try {
-    const res = await fetch("https://afradio.es/status-json.xsl");
-    const data = await res.json();
-    const title = data.icestats?.source?.title || "Sin título";
-    document.getElementById("song-title").textContent = title;
-  } catch (e) {
-    document.getElementById("song-title").textContent = "Reproduciendo AFRadio";
-  }
-}
-setInterval(fetchMetadata, 15000);
-fetchMetadata();
 
 </script>
 
 </body>
 </html>
+
 
 
 
