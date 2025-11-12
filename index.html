@@ -205,10 +205,19 @@ function draw(){
   }
   loop();
 }
+  // Ocultar splash después de animación
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const splash = document.getElementById("splash");
+    if (splash) splash.style.display = "none";
+  }, 2500);
+});
+
 </script>
 
 </body>
 </html>
+
 
 
 
