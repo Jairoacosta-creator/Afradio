@@ -6,8 +6,8 @@ const ASSETS = [
 '/styles.css',
 '/app.js',
 '/afradio-manifest.json',
-'/icons/afradio-192.png',
-'/icons/afradio-512.png'
+'/icons/afradio-192.jpg',
+'/icons/afradio-512.jpg'
 ];
 
 
@@ -29,4 +29,5 @@ self.addEventListener('fetch', (e) => {
 e.respondWith(
 fetch(e.request).catch(() => caches.match(e.request).then(r => r || caches.match(OFFLINE_URL)))
 );
+
 });
