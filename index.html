@@ -3,9 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>la mejor del mundo</title>
+<title>AFradio - la mejor del mundo</title>
 <meta name="theme-color" content="#7DD3FC">
 <link rel="icon" href="LogoAfradio.jpg">
+
+  /* Pantalla de carga (Splash Screen) */
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, var(--bg1), var(--bg2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 2s;
+}
+#splash img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  animation: spin 3s linear infinite;
+}
+#splash h2 {
+  margin-top: 15px;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
 <style>
 :root{
   --bg1:#7dd3fc;
@@ -173,5 +205,6 @@ function draw(){
 
 </body>
 </html>
+
 
 
