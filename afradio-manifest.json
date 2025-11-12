@@ -1,23 +1,15 @@
 {
-  "name": "AFRadio - En Vivo",
-  "short_name": "AFRadio",
-  "description": "La radio latina en vivo - AFRadio",
-  "start_url": "/?utm_source=homescreen",
-  "scope": "/",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0f172a",
-  "theme_color": "#111827",
-  "icons": [
-    {
-      "src": "/icons/afradio-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/afradio-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+"name": "AFradio - En Vivo",
+"short_name": "AFRadio",
+"description": "la mejor del mundo",
+"start_url": "/?utm_source=homescreen",
+"scope": "/",
+"display": "standalone",
+"orientation": "portrait",
+"background_color": "#dbeefe",
+"theme_color": "#7DD3FC",
+"icons": [
+{ "src": "/icons/afradio-192.jpg", "sizes": "192x192", "type": "image/jpg" },
+{ "src": "/icons/afradio-512.jpg", "sizes": "512x512", "type": "image/jpg" }
+]
 }
