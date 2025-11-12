@@ -132,14 +132,14 @@ footer{margin-top:20px;color:rgba(0,0,0,0.6)}
   <p class="sub">la mejor del mundo</p>
 
   <div class="player">
-    <audio id="radio" preload="none"></audio>
-    <button id="playBtn" class="btn btn-play">▶️ Escuchar</button>
-    <p id="song-title" style="margin-top:10px;font-weight:bold;color:#000;">Cargando título...</p>
-    <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
+   <iframe 
+  src="https://afradio.es/public/afradio/embed?theme=light" 
+  frameborder="0" 
+  allowtransparency="true" 
+  style="width:100%; min-height:180px; border:0; border-radius:12px; overflow:hidden;">
+</iframe>
+   <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
 
-    <div class="visualizer-wrap">
-      <canvas id="visualizer"></canvas>
-    </div>
 
     <div class="socials">
       <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
@@ -253,6 +253,7 @@ fetchMetadata();
 
 </body>
 </html>
+
 
 
 
