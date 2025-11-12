@@ -285,9 +285,35 @@ window.addEventListener("load", () => {
     if (splash) splash.style.display = "none";
   }, 2500);
 });
+  // 🔁 Verificador de versión para evitar caché
+(function autoUpdate(){
+  const now = Date.now();
+  const stored = localStorage.getItem("last_version_check") || 0;
+
+  // Solo verifica una vez cada 10 minutos
+  if (now - stored > 600000) {
+    fetch(window.location.href, { cache: "no-cache" })
+      .then(r => r.text())
+      .then(html => {
+        const hash = btoa(unescape(encodeURIComponent(html))).slice(0, 12);
+        const oldHash = localStorage.getItem("app_version_hash");
+        if (oldHash && oldHash !== hash) {
+          console.log("🌀 Nueva versión detectada, recargando...");
+          localStorage.setItem("app_version_hash", hash);
+          location.reload(true);
+        } else if (!oldHash) {
+          localStorage.setItem("app_version_hash", hash);
+        }
+        localStorage.setItem("last_version_check", now);
+      })
+      .catch(() => console.log("Sin conexión para verificar versión."));
+  }
+})();
+
 </script>
 </body>
 </html>
+
 
 
 
