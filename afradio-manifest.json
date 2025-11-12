@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="content="width=device-width, initial-scale=1.0">
-    <title>AFRadio - En Vivo</title>
-    <!-- ⭐️ PWA REQUIREMENT 1: Enlace al manifiesto para iconos e instalación ⭐️ -->
-    <link rel="manifest" href="afradio-manifest.json">
-    
-    <!-- Carga de Tailwind CSS para estilos -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Fuente Inter de Google Fonts y fondo oscuro */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            
-            /* 1. FONDO INTERACTIVO (Gradiente animado) */
-            background: linear-gradient(-45deg, #111827, #1f2937, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
+{
+  "name": "AFRadio - En Vivo",
+  "short_name": "AFRadio",
+  "description": "La radio latina en vivo - AFRadio",
+  "start_url": "/?utm_source=homescreen",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "/icons/afradio-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/afradio-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
