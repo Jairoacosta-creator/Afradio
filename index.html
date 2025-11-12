@@ -1,255 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-<!-- CORRECTO: meta viewport -->
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#7DD3FC">
+<link rel="manifest" href="/afradio-manifest.json">
+<title>AFradio - la mejor del mundo</title>
 
-    <title>AFRadio - En Vivo</title>
-    <!-- ⭐️ PWA REQUIREMENT 1: Enlace al manifiesto para iconos e instalación ⭐️ -->
-    <link rel="manifest" href="afradio-manifest.json">
-    
-    <!-- Carga de Tailwind CSS para estilos -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Fuente Inter de Google Fonts y fondo oscuro */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            
-            /* 1. FONDO INTERACTIVO (Gradiente animado) */
-            background: linear-gradient(-45deg, #111827, #1f2937, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Animación de rotación para el logo/disco */
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        /* Clase permanente para que el logo siempre esté girando */
-        .spinner-disk {
-            animation: rotate 6s linear infinite;
-        }
-        
-        /* Estilo para el botón de Compartir */
-        #share-btn {
-            background-color: #3b82f6; /* Azul */
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 5px 25px rgba(59, 130, 246, 0.5); 
-        }
-        #share-btn:active {
-            box-shadow: 0 3px 15px rgba(59, 130, 246, 0.7);
-            transform: translateY(1px);
-        }
-    </style>
+<link rel="icon" href="/icons/afradio-192.png">
+<link rel="apple-touch-icon" href="/icons/afradio-192.png">
+
+
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body class="bg-gray-900">
+<body>
+<main class="app">
+<header class="top">
+<div class="logo-wrap">
+<img id="logo" src="/icons/afradio-192.png" alt="AFRadio" />
+</div>
+<h1 class="title">AFradio</h1>
+<p class="sub">la mejor del mundo</p>
+</header>
 
-    <!-- Tarjeta Principal (Panel de Conexión) -->
-    <div id="radio-player-card" 
-         class="w-full max-w-sm bg-gray-800 bg-opacity-90 backdrop-blur-sm 
-                shadow-2xl rounded-2xl p-6 md:p-8 text-white 
-                border-t border-gray-700/50">
-        
-        <!-- ⭐️ WIDGET DE METADATOS (iFrame) ⭐️ -->
-        <div class="mb-6 p-4 bg-gray-900/50 rounded-lg border border-gray-700">
-            <h3 class="text-xs font-light text-blue-400 uppercase tracking-widest mb-2">Ahora Sonando:</h3>
-            <iframe 
-                id="radio-widget-iframe"
-                src="https://afradio.es/public/afradio/embed?theme=light" 
-                frameborder="0" 
-                allowtransparency="true" 
-                allow="autoplay"
-                style="width: 100%; min-height: 150px; border: 0;"
-                title="Widget de Metadatos y Reproductor de AFRadio">
-            </iframe>
-        </div>
-        
-        <!-- Área del Logo/Arte del Álbum -->
-        <div class="text-center mb-6">
-            <div id="visualizer-container" 
-                 class="w-48 h-48 mx-auto rounded-full bg-gray-700 p-2 
-                        border-8 border-gray-700 shadow-xl shadow-black/50 overflow-hidden">
-                
-                <!-- LOGO DE AFRADIO: GIRA AUTOMÁTICAMENTE (clase spinner-disk) -->
-                <div id="spinning-graphic" class="w-full h-full rounded-full bg-gray-900/50 flex items-center justify-center spinner-disk cursor-default">
-                    <img id="logo-image" 
-                         src="https://i.postimg.cc/B68pB8K2/Logo-Afradio.jpg" 
-                         alt="Logo AFRadio" 
-                         class="w-full h-full object-cover rounded-full p-4"
-                         onerror="this.onerror=null; this.src='https://placehold.co/192x192/1f2937/ffffff?text=AFRADIO';"
-                    />
-                </div>
-            </div>
-        </div>
-        
-        <!-- Título principal y Estado -->
-        <div class="text-center mb-6">
-            <p class="text-sm font-light text-blue-400 uppercase tracking-widest" id="station-info">AFRADIO LIVE</p>
-            <h2 id="main-title" class="text-xl font-extrabold text-white mt-2 mb-4 min-h-6">¡Conectando el Ritmo!</h2>
 
-            <!-- Botón Compartir (ahora en el lugar del botón principal) -->
-            <button id="share-btn" 
-                    class="w-full flex items-center justify-center p-4 rounded-xl text-white font-bold text-lg 
-                           shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">
-                <!-- Icono de Compartir -->
-                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.882 13.118 9 12.894 9 12.67V12a2 2 0 10-4 0v.67c0 .224.118.448.316.67l-2.008 2.008A3 3 0 005.132 18H19.868a3 3 0 002.132-5.132L20 12h-2V6a2 2 0 10-4 0v6h-2v4"></path></svg>
-                <span id="button-text">Compartir App</span>
-            </button>
-            
-            <!-- Indicador de Estado estático -->
-            <div class="mt-4 text-center">
-                <p class="text-xs font-semibold uppercase tracking-wider text-gray-400" id="status-text">
-                    La animación del logo está activa
-                </p>
-                
-                <!-- Contenedor para mensajes de notificación -->
-                <div id="notification-message-box" class="mt-4 p-3 bg-blue-900 border border-blue-700 text-blue-300 rounded-xl hidden" role="alert">
-                    <!-- El mensaje de notificación se insertará aquí -->
-                </div>
-            </div>
-        </div>
+<section class="player">
+<div class="visualizer-wrap">
+<canvas id="visualizer" width="600" height="120"></canvas>
+</div>
 
-        <!-- Botones de Redes Sociales (sin cambios) -->
-        <div class="mt-8 pt-4 border-t border-gray-700">
-            <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">Conéctate</p>
-            <div class="grid grid-cols-4 gap-3">
-                <!-- Facebook -->
-                <button onclick="window.open('https://www.facebook.com/afradiolatina', '_blank')" 
-                        class="p-3 rounded-full bg-gray-700 hover:bg-blue-600 transition duration-150 flex justify-center items-center group">
-                    <svg class="w-5 h-5 text-gray-200 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3.5l-.5 3H13v6.78c4.61-.83 8-4.84 8-9.78z"/></svg>
-                </button>
-                <!-- TikTok -->
-                <button onclick="window.open('https://tiktok.com/@afradiolatina7', '_blank')" 
-                        class="p-3 rounded-full bg-gray-700 hover:bg-black transition duration-150 flex justify-center items-center group">
-                    <svg class="w-5 h-5 text-gray-200 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.3 2.1c1.1 0 2 .9 2 2v5.5H18c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-3.7V22h-3c-1.1 0-2-.9-2-2v-6.7c0-1.1.9-2 2-2h3.7v-2H12.3c-1.1 0-2-.9-2-2V4.1c0-1.1.9-2 2-2z"/></svg>
-                </button>
-                <!-- Instagram -->
-                <button onclick="window.open('https://www.instagram.com/afradio2022', '_blank')" 
-                        class="p-3 rounded-full bg-gray-700 hover:bg-pink-600 transition duration-150 flex justify-center items-center group">
-                    <svg class="w-5 h-5 text-gray-200 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 4A5.6 5.6 0 004 7.6v8.8A5.6 5.6 0 007.6 20h8.8a5.6 5.6 0 003.6-3.6V7.6A5.6 5.6 0 0016.4 4H7.6zm9.8 1.5a1 1 0 100 2 1 1 0 000-2zm-6 3a4 4 0 100 8 4 4 0 000-8zm0 2a2 2 0 110 4 2 2 0 010-4z"/></svg>
-                </button>
-                <!-- Podcasts -->
-                <button onclick="window.open('https://afradio.es/public/afradio/podcasts', '_blank')" 
-                        class="p-3 rounded-full bg-gray-700 hover:bg-green-600 transition duration-150 flex justify-center items-center group">
-                    <!-- Icono de Podcast/Micrófono -->
-                    <svg class="w-5 h-5 text-gray-200 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3.1-2.54 5.1-5.3 5.1S6.7 14.1 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-4.28c3.28-.49 6-3.31 6-6.72h-1.7z"/></svg>
-                </button>
-            </div>
-        </div>
-        
-        <!-- INSTRUCCIÓN para el usuario sobre el reproductor -->
-        <p class="mt-6 text-xs text-gray-400 text-center">
-             ⚠️ Para escuchar la radio, haz clic en el botón de Play dentro del recuadro negro del "Widget de Metadatos".
-        </p>
-    </div>
 
-    <script>
-        // Obtener elementos del DOM relacionados con la notificación y PWA
-        const shareBtn = document.getElementById('share-btn');
-        const mainTitleElement = document.getElementById('main-title');
-        const notificationMessageBox = document.getElementById('notification-message-box');
+<div class="controls">
+<audio id="radio-audio" preload="none"></audio>
+<button id="play-btn" class="btn-primary">▶️ Escuchar AFRadio</button>
+<button id="share-btn" class="btn-secondary">🔗 Compartir</button>
+</div>
 
-        // Constantes para los mensajes
-        const MAIN_TITLE = '¡Conectando el Ritmo!';
-        const SHARE_SUCCESS_MESSAGE = '¡Enlace copiado al portapapeles!';
-        const SHARE_ERROR_MESSAGE = 'Error al intentar compartir/copiar.';
 
-        // --- PWA REQUIREMENT: Registro del Service Worker ---
-        // Esto permite que la aplicación sea instalable y funcione sin conexión.
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Registrar el Service Worker. El archivo se llama 'service-worker.js'
-                navigator.serviceWorker.register('service-worker.js') 
-                    .then(registration => {
-                        console.log('Service Worker registrado con éxito:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.log('Fallo en el registro del Service Worker:', error);
-                    });
-            });
-        }
-        // --------------------------------------------------------
-        
-        /**
-         * Maneja y muestra mensajes de notificación temporalmente.
-         * @param {string} message Mensaje a mostrar al usuario.
-         * @param {boolean} isError Indica si es un mensaje de error (rojo) o éxito (azul).
-         */
-        function showNotification(message, isError = false) {
-            notificationMessageBox.textContent = message;
-            // Limpiar clases de estilo previas y configurar las nuevas
-            notificationMessageBox.classList.remove('hidden', 'bg-red-900', 'border-red-700', 'text-red-300', 'bg-blue-900', 'border-blue-700', 'text-blue-300');
-            
-            if (isError) {
-                 notificationMessageBox.classList.add('bg-red-900', 'border-red-700', 'text-red-300');
-            } else {
-                 notificationMessageBox.classList.add('bg-blue-900', 'border-blue-700', 'text-blue-300');
-            }
-            notificationMessageBox.classList.remove('hidden');
+<div class="socials">
+<a id="fb" class="social" aria-label="Facebook"></a>
+<a id="tiktok" class="social" aria-label="TikTok"></a>
+<a id="ig" class="social" aria-label="Instagram"></a>
+<a id="pod" class="social" aria-label="Podcast"></a>
+</div>
 
-            // Ocultar el mensaje después de 3 segundos
-            setTimeout(() => {
-                notificationMessageBox.classList.add('hidden');
-            }, 3000);
-        }
 
-        // --- Lógica del Botón Compartir ---
-        function handleShare() {
-            // Utilizamos window.location.href para compartir la URL actual de esta PWA
-            const url = window.location.href;
-            
-            if (navigator.share) {
-                // Compartir nativo (móviles)
-                navigator.share({
-                    title: 'AFRadio - ¡Música Latina en Vivo!',
-                    text: 'Conéctate con AFRadio y sus redes sociales.',
-                    url: url 
-                }).then(() => {
-                    showNotification('¡Compartido con éxito!');
-                }).catch((error) => {
-                    // Si falla el compartir nativo (ej. el usuario cancela), no mostramos error.
-                    console.warn('Fallo en el compartir nativo:', error);
-                });
-            } else {
-                // Copiar al portapapeles (desktops, usando el método antiguo document.execCommand)
-                const tempInput = document.createElement('input');
-                tempInput.value = url;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                try {
-                    document.execCommand('copy');
-                    showNotification(SHARE_SUCCESS_MESSAGE);
-                } catch (err) {
-                    showNotification(SHARE_ERROR_MESSAGE, true);
-                }
-                document.body.removeChild(tempInput);
-            }
-        }
-        
-        // --- Event Listeners ---
-        shareBtn.addEventListener('click', handleShare);
+<div class="iframe-wrap">
+<iframe id="embed-iframe" src="https://afradio.es/public/afradio/embed?theme=light" title="AFRadio embed" sandbox="allow-scripts allow-same-origin allow-popups" allow="autoplay" loading="lazy"></iframe>
+</div>
+</section>
 
-        // Configuración inicial de la interfaz
-        window.onload = () => {
-             mainTitleElement.textContent = MAIN_TITLE;
-        };
-    </script>
+
+<footer class="foot">© AFRadio</footer>
+</main>
+
+
+<script src="/app.js"></script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('/service-worker.js').catch(e => console.warn('SW registration failed:', e));
+}
+</script>
 </body>
-
 </html>
-
