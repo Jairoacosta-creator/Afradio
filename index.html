@@ -1,69 +1,168 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#7DD3FC">
-<link rel="manifest" href="/afradio-manifest.json">
 <title>AFradio - la mejor del mundo</title>
+<meta name="theme-color" content="#7DD3FC">
+<link rel="icon" href="LogoAfradio.jpg">
+<style>
+:root{
+  --bg1:#7dd3fc;
+  --bg2:#dbeefe;
+  --text:#000;
+  --btn:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(120deg,var(--bg1),var(--bg2));
+  background-size:300% 300%;
+  animation:grad 8s ease infinite;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+@keyframes grad{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
+/* Logo giratorio */
+.logo-wrap{
+  width:160px;height:160px;border-radius:50%;
+  overflow:hidden;margin-bottom:10px;
+}
+.logo-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
-<link rel="icon" href="/icons/afradio-192.jpg">
-<link rel="apple-touch-icon" href="/icons/afradio-192.jpg">
-
-
-<link rel="stylesheet" href="/styles.css">
+h1{font-size:1.8rem;margin:6px 0;font-weight:800}
+p.sub{font-size:1rem;margin-bottom:15px}
+.player{background:rgba(255,255,255,0.6);border-radius:20px;padding:20px;width:90%;max-width:500px;text-align:center;backdrop-filter:blur(8px)}
+button{cursor:pointer}
+.btn{width:100%;padding:14px;margin-top:10px;font-weight:700;border-radius:10px;border:none;font-size:1rem}
+.btn-play{background:var(--btn);color:var(--text)}
+.btn-share{background:transparent;border:2px solid var(--btn);color:var(--text)}
+.visualizer-wrap{margin:20px 0;height:120px;display:flex;justify-content:center;align-items:center}
+canvas{width:100%;height:120px}
+.socials{display:flex;justify-content:center;gap:15px;margin-top:10px}
+.social img{width:38px;height:38px;filter:drop-shadow(0 0 3px rgba(0,0,0,0.3))}
+footer{margin-top:20px;color:rgba(0,0,0,0.6)}
+</style>
 </head>
 <body>
-<main class="app">
-<header class="top">
-<div class="logo-wrap">
-<img id="logo" src="/icons/afradio-192.jpg" alt="AFRadio" />
-</div>
-<h1 class="title">AFradio</h1>
-<p class="sub">la mejor del mundo</p>
-</header>
 
+<div class="app">
+  <div class="logo-wrap">
+    <img src="LogoAfradio.jpg" alt="AFRadio logo">
+  </div>
+  <h1>AFradio</h1>
+  <p class="sub">la mejor del mundo</p>
 
-<section class="player">
-<div class="visualizer-wrap">
-<canvas id="visualizer" width="600" height="120"></canvas>
-</div>
+  <div class="player">
+    <audio id="radio" preload="none"></audio>
+    <button id="playBtn" class="btn btn-play">▶️ Escuchar AFRadio</button>
+    <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
 
+    <div class="visualizer-wrap">
+      <canvas id="visualizer"></canvas>
+    </div>
 
-<div class="controls">
-<audio id="radio-audio" preload="none"></audio>
-<button id="play-btn" class="btn-primary">▶️ Escuchar AFRadio</button>
-<button id="share-btn" class="btn-secondary">🔗 Compartir</button>
-</div>
-
-
-<div class="socials">
-<a id="fb" class="social" aria-label="Facebook"></https://www.facebook.com/afradiolatina>
-<a id="tiktok" class="social" aria-label="TikTok"></https://tiktok.com/@afradiolatina7>
-<a id="ig" class="social" aria-label="Instagram"></https://www.instagram.com/afradio2022>
-<a id="pod" class="social" aria-label="Podcast"></https://afradio.es/public/afradio/podcasts>
+    <div class="socials">
+      <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
+      <a href="https://tiktok.com/@afradiolatina7" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+      <a href="https://www.instagram.com/afradio2022" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
+      <a href="https://afradio.es/public/afradio/podcasts" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/2504/2504923.png" alt="Podcast"></a>
+    </div>
+  </div>
 </div>
 
-
-<div class="iframe-wrap">
-<iframe id="embed-iframe" src="https://afradio.es/public/afradio/embed?theme=light" title="AFRadio embed" sandbox="allow-scripts allow-same-origin allow-popups" allow="autoplay" loading="lazy"></iframe>
-</div>
-</section>
-
-
-<footer class="foot">© AFRadio</footer>
-</main>
-
-
-<script src="/app.js"></script>
-
+<footer>© AFRadio</footer>
 
 <script>
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('/service-worker.js').catch(e => console.warn('SW registration failed:', e));
+const STREAM_URL = "https://afradio.es/listen/afradio/radio.mp3";
+const audio = document.getElementById("radio");
+const playBtn = document.getElementById("playBtn");
+const shareBtn = document.getElementById("shareBtn");
+const canvas = document.getElementById("visualizer");
+let isPlaying = false;
+
+playBtn.addEventListener("click", async ()=>{
+  if(!isPlaying){
+    try{
+      audio.src = STREAM_URL;
+      audio.crossOrigin = "anonymous";
+      await audio.play();
+      playBtn.textContent = "⏸️ Pausar";
+      isPlaying = true;
+      startVisualizer();
+    }catch(e){
+      alert("Error al reproducir. Verifica la URL o conexión.");
+      console.error(e);
+    }
+  }else{
+    audio.pause();
+    playBtn.textContent = "▶️ Escuchar AFRadio";
+    isPlaying = false;
+    stopVisualizer();
+  }
+});
+
+shareBtn.addEventListener("click", async ()=>{
+  const data = {title:"AFradio", text:"Escucha AFRadio - la mejor del mundo", url:window.location.href};
+  try{
+    if(navigator.share) await navigator.share(data);
+    else{
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Enlace copiado al portapapeles");
+    }
+  }catch(e){console.log(e);}
+});
+
+// Visualizador de audio
+let audioCtx, analyser, src, rafId;
+function startVisualizer(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    src = audioCtx.createMediaElementSource(audio);
+    src.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 256;
+  }
+  draw();
+}
+function stopVisualizer(){if(rafId) cancelAnimationFrame(rafId);}
+function draw(){
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width = canvas.clientWidth * devicePixelRatio;
+  const h = canvas.height = canvas.clientHeight * devicePixelRatio;
+  const bufferLength = analyser.frequencyBinCount;
+  const data = new Uint8Array(bufferLength);
+  function loop(){
+    rafId = requestAnimationFrame(loop);
+    analyser.getByteFrequencyData(data);
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle="#000";
+    const barW = (w / bufferLength) * 2.5;
+    let x = 0;
+    for(let i=0;i<bufferLength;i++){
+      const v = data[i]/255;
+      const barH = v*h*0.9;
+      ctx.fillRect(x,h-barH,barW,barH);
+      x += barW + 1;
+    }
+  }
+  loop();
 }
 </script>
-</body>
 
+</body>
 </html>
