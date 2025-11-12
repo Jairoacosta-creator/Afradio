@@ -129,12 +129,12 @@ footer{margin-top:20px;color:rgba(0,0,0,0.6)}
   <div class="logo-wrap">
     <img src="LogoAfradio.jpg" alt="AFRadio logo">
   </div>
-  <h1>AFradio</h1>
   <p class="sub">la mejor del mundo</p>
 
   <div class="player">
     <audio id="radio" preload="none"></audio>
-    <button id="playBtn" class="btn btn-play">▶️ Escuchar AFRadio</button>
+    <button id="playBtn" class="btn btn-play">▶️ Escuchar</button>
+    <p id="song-title" style="margin-top:10px;font-weight:bold;color:#000;">Cargando título...</p>
     <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
 
     <div class="visualizer-wrap">
@@ -175,7 +175,7 @@ playBtn.addEventListener("click", async ()=>{
     }
   }else{
     audio.pause();
-    playBtn.textContent = "▶️ Escuchar AFRadio";
+    playBtn.textContent = "▶️ Escuchar";
     isPlaying = false;
     stopVisualizer();
   }
@@ -235,11 +235,25 @@ window.addEventListener("load", () => {
     if (splash) splash.style.display = "none";
   }, 2500);
 });
+  // Mostrar metadatos desde Icecast
+async function fetchMetadata() {
+  try {
+    const res = await fetch("https://afradio.es/status-json.xsl");
+    const data = await res.json();
+    const title = data.icestats?.source?.title || "Sin título";
+    document.getElementById("song-title").textContent = title;
+  } catch (e) {
+    document.getElementById("song-title").textContent = "Reproduciendo AFRadio";
+  }
+}
+setInterval(fetchMetadata, 15000);
+fetchMetadata();
 
 </script>
 
 </body>
 </html>
+
 
 
 
