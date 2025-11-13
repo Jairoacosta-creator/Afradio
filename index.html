@@ -143,7 +143,17 @@ button{cursor:pointer}
 }
 canvas{width:100%;height:120px}
 .socials{display:flex;justify-content:center;gap:15px;margin-top:10px}
-.social img{width:38px;height:38px;filter:drop-shadow(0 0 3px rgba(0,0,0,0.4))}
+.social img {
+  width: 42px;
+  height: 42px;
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.4));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.social img:hover {
+  transform: scale(1.15);
+  filter: brightness(1.3) invert(0);
+}
+
 footer{
   margin-top:20px;
   width:100%;
@@ -176,14 +186,21 @@ footer{
       <canvas id="visualizer"></canvas>
     </div>
 
-    <div class="socials">
-      <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
-      <a href="https://tiktok.com/@afradiolatina7" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-      <a href="https://www.instagram.com/afradio2022" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
-      <a href="https://afradio.es/public/afradio/podcasts" target="_blank" class="social"><img src="https://cdn-icons-png.flaticon.com/512/2504/2504923.png" alt="Podcast"></a>
-    </div>
-  </div>
+ <div class="socials">
+  <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social" title="Facebook">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+  </a>
+  <a href="https://tiktok.com/@afradiolatina7" target="_blank" class="social" title="TikTok">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok">
+  </a>
+  <a href="https://www.instagram.com/afradio2022" target="_blank" class="social" title="Instagram">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+  </a>
+  <a href="https://afradio.es/public/afradio/podcasts" target="_blank" class="social" title="Podcast">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlepodcasts.svg" alt="Podcast">
+  </a>
 </div>
+
 
 <footer>© AFRadio 2025</footer>
 
@@ -313,6 +330,7 @@ window.addEventListener("load", () => {
 </script>
 </body>
 </html>
+
 
 
 
