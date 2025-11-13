@@ -3,8 +3,8 @@
   "short_name": "AFRadio",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1c3f66",
-  "theme_color": "#1c3f66",
+  "background_color": "#0A174E",
+  "theme_color": "#0A174E"
   "orientation": "portrait",
   "icons": [
   {
@@ -17,9 +17,9 @@
     "sizes": "512x512",
     "type": "image/png"
   }
-],
-"background_color": "#0A174E",
-"theme_color": "#0A174E"
+ ]
+
+}
 
 
 
