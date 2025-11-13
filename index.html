@@ -327,10 +327,20 @@ window.addEventListener("load", () => {
       .catch(() => console.log("Sin conexión para verificar versión."));
   }
 })();
+.socials {
+  position: relative;
+  z-index: 5; /* asegura que esté por encima del canvas o reproductor */
+}
+
+canvas {
+  position: relative;
+  z-index: 1;
+}
 
 </script>
 </body>
 </html>
+
 
 
 
