@@ -1,134 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AFRadio - la mejor del mundo</title>
-<meta name="theme-color" content="#1c3f66">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="AFRadio_logo_192.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A174E">
+  <link rel="manifest" href="manifest.json">
+  <title>AFRadio - La mejor del mundo</title>
 
+  <!-- 🔹 ESTILOS PRINCIPALES -->
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, #0A174E 0%, #122C6A 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
-<style>
-:root{
-  --bg1:#1c3f66;
-  --bg2:#276ba3;
-  --bg3:#152b47;
-  --text:#000;
-  --btn:#fff;
-}
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-/* Fondo metalizado */
-body{
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
-  background-size:200% 200%;
-  animation:metalShift 10s ease infinite;
-  margin:0;
-  text-align:center;
-  overflow:hidden;
-}
-@keyframes metalShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+    /* LOGO GIRATORIO CON BRILLO */
+    .logo-container {
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
 
-/* Splash screen */
-#splash{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  z-index:9999;animation:fadeOut 1s ease forwards;animation-delay:2s;
-}
-#splash img{width:160px;height:160px;border-radius:50%;animation:spin 3s linear infinite;}
-#splash h2{color:#fff;margin-top:15px;font-size:1.2rem;}
-@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+    .rotating-logo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      animation: spin 12s linear infinite;
+      z-index: 2;
+      position: relative;
+    }
 
-/* App */
-.logo-wrap{width:160px;height:160px;margin:0 auto 10px;border-radius:50%;overflow:hidden;display:flex;justify-content:center;align-items:center;}
-.logo-wrap img{width:100%;height:100%;object-fit:cover;animation:spin 8s linear infinite;}
-p.sub{color:#fff;font-size:1.2rem;font-weight:600;margin-bottom:15px;text-shadow:0 0 4px rgba(0,0,0,0.5);}
+    .logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 150, 255, 0.5), transparent 70%);
+      filter: blur(15px);
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
 
-.player{background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);border-radius:20px;padding:20px;width:90%;max-width:480px;box-shadow:0 0 15px rgba(0,0,0,0.3);}
-.btn{width:100%;padding:14px;margin-top:10px;font-weight:700;border-radius:10px;border:none;font-size:1rem;cursor:pointer;}
-.btn-play{background:var(--btn);color:var(--text);}
-.btn-share{background:transparent;border:2px solid var(--btn);color:var(--btn);}
-.socials{display:flex;justify-content:center;gap:15px;margin-top:15px;}
-.social img{width:40px;height:40px;filter:brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.3));transition:transform 0.3s ease,filter 0.3s ease;}
-.social img:hover{transform:scale(1.15);filter:brightness(1.2);}
-footer{color:#fff;margin-top:25px;text-shadow:0 0 4px rgba(0,0,0,0.5);}
-</style>
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .slogan {
+      font-size: 1.4em;
+      color: #fff;
+      margin: 15px 0 25px 0;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    /* REPRODUCTOR DESTACADO */
+    .player-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 15px;
+      width: 85%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      margin-bottom: 25px;
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
+      border-radius: 10px;
+    }
+
+    /* BOTÓN COMPARTIR */
+    #shareBtn {
+      background: #00aaff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 25px;
+    }
+
+    #shareBtn:hover {
+      background: #0088cc;
+    }
+
+    /* REDES SOCIALES */
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 15px;
+    }
+
+    .social-buttons a {
+      color: white;
+      font-size: 1.8em;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-buttons a:hover {
+      transform: scale(1.2);
+      color: #00aaff;
+    }
+
+    footer {
+      font-size: 0.9em;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 25px;
+    }
+  </style>
 </head>
 
 <body>
-<div id="splash">
-  <img src="LogoAfradio.jpg" alt="AFRadio">
-  <h2>Bienvenido a AFRadio</h2>
-</div>
-
-<div class="app">
-  <div class="logo-wrap">
-    <img src="LogoAfradio.jpg" alt="Logo AFRadio">
-  </div>
-  <p class="sub">la mejor del mundo</p>
-
-  <div class="player">
-    <!-- Reproductor funcional (iframe AzuraCast) -->
-    <iframe src="https://afradio.es/public/afradio/embed?theme=light" 
-      frameborder="0" allowtransparency="true" style="width:100%;min-height:150px;border:0;"></iframe>
-
-    <button id="shareBtn" class="btn btn-share">🔗 Compartir</button>
-
-    <div class="socials">
-      <a href="https://www.facebook.com/afradiolatina" target="_blank" class="social"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-      <a href="https://tiktok.com/@afradiolatina7" target="_blank" class="social"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok"></a>
-      <a href="https://www.instagram.com/afradio2022" target="_blank" class="social"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
-      <a href="https://afradio.es/public/afradio/podcasts" target="_blank" class="social"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlepodcasts.svg" alt="Podcast"></a>
+  <!-- 🔹 CONTENIDO PRINCIPAL -->
+  <div class="app-container">
+    <div class="logo-container">
+      <div class="logo-glow"></div>
+      <img src="AFRadio_logo_512.png" alt="Logo AFRadio" class="rotating-logo">
     </div>
+
+    <p class="slogan">la mejor del mundo</p>
+
+    <div class="player-container">
+      <audio id="radio" controls crossorigin="anonymous">
+        <source src="https://afradio.es/listen/afradio/radio.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+    </div>
+
+    <button id="shareBtn">🔗 Compartir</button>
+
+    <div class="social-buttons">
+      <a href="https://www.facebook.com/afradiolatina" target="_blank" title="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://tiktok.com/@afradiolatina7" target="_blank" title="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://www.instagram.com/afradio2022" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://afradio.es/public/afradio/podcasts" target="_blank" title="Podcast">
+        <i class="fas fa-podcast"></i>
+      </a>
+    </div>
+
+    <footer>© AFRadio 2025</footer>
   </div>
-</div>
 
-<footer>© AFRadio 2025</footer>
+  <!-- Iconos de FontAwesome -->
+  <script src="https://kit.fontawesome.com/a2b3e6f9b9.js" crossorigin="anonymous"></script>
 
-<script>
-// Ocultar splash
-window.addEventListener("load",()=>{
-  setTimeout(()=>{document.getElementById("splash").style.display="none";},2500);
-});
+  <!-- 🔹 SCRIPT DE FUNCIONES -->
+  <script>
+    // Ocultar splash si existe
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      if (splash) setTimeout(() => splash.style.display = "none", 2500);
+    });
 
-// Compartir
-const shareBtn=document.getElementById("shareBtn");
-if(shareBtn){
-  shareBtn.addEventListener("click",async()=>{
-    const data={title:"AFRadio",text:"Escucha AFRadio - la mejor del mundo",url:"https://jairoacosta-creator.github.io/Afradio/"
-   };
-    try{
-      if(navigator.share){await navigator.share(data);}
-      else{await navigator.clipboard.writeText(data.url);alert("Enlace copiado al portapapeles");}
-    }catch(e){console.log(e);}
-  });
-}
+    // Botón compartir
+    const shareBtn = document.getElementById("shareBtn");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", async () => {
+        const data = {
+          title: "AFRadio",
+          text: "Escucha AFRadio - la mejor del mundo",
+          url: "https://jairoacosta-creator.github.io/Afradio/"
+        };
+        try {
+          if (navigator.share) {
+            await navigator.share(data);
+          } else {
+            await navigator.clipboard.writeText(data.url);
+            alert("🔗 Enlace copiado al portapapeles");
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    }
 
-// Registrar Service Worker
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("service-worker.js").then(()=>console.log("SW registrado"));
-}
-</script>
+    // Registrar Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker registrado correctamente"))
+        .catch(err => console.log("Error al registrar SW:", err));
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
