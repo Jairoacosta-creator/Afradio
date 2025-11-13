@@ -108,7 +108,8 @@ window.addEventListener("load",()=>{
 const shareBtn=document.getElementById("shareBtn");
 if(shareBtn){
   shareBtn.addEventListener("click",async()=>{
-    const data={title:"AFRadio",text:"Escucha AFRadio - la mejor del mundo",url:"https://afradio.es/public/afradio"};
+    const data={title:"AFRadio",text:"Escucha AFRadio - la mejor del mundo",url:"https://jairoacosta-creator.github.io/Afradio/"
+   };
     try{
       if(navigator.share){await navigator.share(data);}
       else{await navigator.clipboard.writeText(data.url);alert("Enlace copiado al portapapeles");}
@@ -123,6 +124,7 @@ if("serviceWorker" in navigator){
 </script>
 </body>
 </html>
+
 
 
 
