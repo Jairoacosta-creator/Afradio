@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jairoacosta-creator.github.io/Afradio/sitemap.xml
