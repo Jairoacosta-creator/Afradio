@@ -29,23 +29,64 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* FONDO AZUL METÁLICO (corregido) */
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(180deg, #0a174e 0%, #122c6a 100%);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      text-align: center;
-      overflow-x: hidden;
-      padding-top: 30px;
-      position: relative;
-      z-index: 1;
-    }
+    /* FONDO AZUL METÁLICO ANIMADO */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #0a174e, #122c6a, #0a174e);
+  background-size: 300% 300%;
+  animation: metallicMove 12s ease-in-out infinite;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  text-align: center;
+  overflow-x: hidden;
+  padding-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Brillo muy suave que recorre el fondo */
+@keyframes metallicMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* Brillo suave detrás del logo */
+.logo-glow {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-glow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+              rgba(255,255,255,0.65) 0%,
+              rgba(255,255,255,0.45) 30%,
+              rgba(255,255,255,0.20) 60%,
+              rgba(255,255,255,0.10) 75%,
+              transparent 90%);
+  filter: blur(25px);
+  z-index: 0;
+  border-radius: 50%;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+/* Animación suave de respiración */
+@keyframes glowPulse {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.90; }
+  100% { opacity: 0.55; }
+}
 
     /* Halo detrás del logo */
     body::before {
@@ -233,6 +274,7 @@
   </script>
 </body>
 </html>
+
 
 
 
