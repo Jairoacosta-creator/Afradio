@@ -1,400 +1,303 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AFRadio — La mejor del mundo</title>
-
-  <!-- PWA / SEO -->
-  <meta name="theme-color" content="#ffffff" />
+ 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AFRadio - Radio Latina Online en Vivo | Música, Éxitos y Entretenimiento</title>
+  <meta name="theme-color" content="#1c3f66" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="description" content="AFRadio - Radio latina online en vivo. Música, éxitos y programación 24/7." />
-  <meta name="keywords" content="radio online, afradio, música latina, radio en vivo" />
-  <meta name="author" content="AFRadio" />
-  <meta property="og:title" content="AFRadio - La mejor del mundo" />
-  <meta property="og:description" content="Escucha AFRadio en vivo desde tu móvil o navegador." />
-  <meta property="og:image" content="AFRadio_logo_512.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jairoacosta-creator.github.io/Afradio/" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="AFRadio" />
 
-  <!-- Iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- ⭐ SEO (esto sí va aquí) -->
+  <meta name="description" content="Escucha AFRadio en vivo. Música latina, éxitos, entretenimiento, programación en directo y lo mejor de la radio online. Disponible en Android y iPhone.">
+  <meta name="keywords" content="radio online, escuchar radio, AFRadio, afradiolatina, música latina, radio en vivo, emisora online, radio por internet">
+  <meta name="author" content="AFRadio">
+
+  <!-- SEO para compartir en redes -->
+  <meta property="og:title" content="AFRadio - La mejor del mundo">
+  <meta property="og:description" content="Escucha AFRadio en vivo desde tu móvil o navegador. Música, entretenimiento y lo mejor de la programación.">
+  <meta property="og:image" content="AFRadio_logo_512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jairoacosta-creator.github.io/Afradio/">
+
+  <!-- Para iPhone -->
+  <meta name="apple-mobile-web-app-title" content="AFRadio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- ICONOS (correcto) -->
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RadioStation",
+  "name": "AFRadio",
+  "url": "https://jairoacosta-creator.github.io/Afradio/",
+  "logo": "https://jairoacosta-creator.github.io/Afradio/AFRadio_logo_512.png",
+  "image": "https://jairoacosta-creator.github.io/Afradio/AFRadio_logo_512.png",
+  "description": "AFRadio - Radio latina online en vivo. Música latina, éxitos, entretenimiento y programación 24/7.",
+  "sameAs": [
+    "https://www.facebook.com/afradiolatina",
+    "https://www.instagram.com/afradio2022",
+    "https://tiktok.com/@afradiolatina7",
+    "https://afradio.es/public/afradio/podcasts"
+  ],
+  "broadcastFrequency": "Online",
+  "broadcastTimezone": "Europe/Madrid",
+  "areaServed": "Worldwide"
+}
+</script>
 
   <style>
-    /* ---------------------- Estilo PS5 blanco glossy + luz azul animada ---------------------- */
-    :root{
-      --accent: #00bcd4;
-      --fg: #0b1320;
-      --glass: rgba(255,255,255,0.85);
-    }
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-    body{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:34px 18px;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 50%, #f6f8fb 100%);
-      overflow-x:hidden;
-      color:var(--fg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      position:relative;
+    /* FONDO AZUL METÁLICO ANIMADO */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #0a174e, #122c6a, #0a174e);
+  background-size: 300% 300%;
+  animation: metallicMove 12s ease-in-out infinite;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  text-align: center;
+  overflow-x: hidden;
+  padding-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Brillo muy suave que recorre el fondo */
+@keyframes metallicMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* Brillo suave detrás del logo */
+.logo-glow {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-glow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+              rgba(255,255,255,0.65) 0%,
+              rgba(255,255,255,0.45) 30%,
+              rgba(255,255,255,0.20) 60%,
+              rgba(255,255,255,0.10) 75%,
+              transparent 90%);
+  filter: blur(25px);
+  z-index: 0;
+  border-radius: 50%;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+/* Animación suave de respiración */
+@keyframes glowPulse {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.90; }
+  100% { opacity: 0.55; }
+}
+
+    /* Halo detrás del logo */
+    body::before {
+      content: "";
+      position: fixed;
+      left: 50%;
+      top: 12%;
+      transform: translateX(-50%);
+      width: 90vw;
+      max-width: 900px;
+      height: 420px;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center,
+                  rgba(10,23,78,0.75) 0%,
+                  rgba(10,23,78,0.55) 30%,
+                  rgba(8,35,80,0.15) 55%,
+                  rgba(8,35,80,0) 80%);
+      filter: blur(18px);
+      z-index: 0;
     }
 
-    /* glossy metallic texture */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-20% -20% -20% -20%;
-      background:
-        radial-gradient(60% 40% at 10% 20%, rgba(0,188,212,0.08), transparent 10%),
-        radial-gradient(40% 30% at 90% 80%, rgba(0,188,212,0.06), transparent 10%),
-        linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.0) 60%);
-      filter:blur(28px) saturate(110%);
-      transform: translateZ(0);
-      z-index:0;
-      animation: blueSweep 10s linear infinite;
-      pointer-events:none;
-    }
-
-    @keyframes blueSweep {
-      0%{ transform: translateX(-10%) }
-      50%{ transform: translateX(10%) }
-      100%{ transform: translateX(-10%) }
-    }
-
-    /* Container principal */
-    .wrap{
-      width:100%;
-      max-width:820px;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
-
-    /* Logo: giro contínuo (opción A) */
+    /* LOGO (centrado y más grande) */
     .logo {
-      width:220px;
-      height:220px;
-      border-radius:50%;
-      overflow:hidden;
-      display:block;
-      box-shadow: 0 18px 40px rgba(11,19,32,0.12), 0 6px 18px rgba(0,188,212,0.06);
-      margin:6px 0 12px 0;
-      transform-origin:center center;
-      animation: spin 12s linear infinite, popIn 450ms ease;
-      position:relative;
-      background:linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.3));
-    }
-    .logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-    @keyframes popIn{from{transform:scale(.96)}to{transform:scale(1)}}
-
-    h1{font-size:1.25rem;margin:6px 0 0 0;font-weight:700;color:var(--fg)}
-    p.lead{margin:6px 0 18px;color:rgba(11,19,32,0.68)}
-
-    /* Panel reproductor */
-    #pro-player{
-      width:92%;
-      max-width:680px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,252,0.92));
-      border-radius:16px;
-      box-shadow: 0 18px 50px rgba(11,19,32,0.07);
-      padding:16px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      position:relative;
-      z-index:3;
-      backdrop-filter: blur(6px) saturate(120%);
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      animation: spin 12s linear infinite;
+      margin-top: 12px;
+      z-index: 2;
+      position: relative;
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.45),
+        0 0 40px rgba(0,170,255,0.12),
+        inset 0 -6px 20px rgba(0,0,0,0.25);
+      transition: transform 220ms ease;
     }
 
-    #player-art{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 8px 22px rgba(11,19,32,0.12)}
-    #meta{flex:1;display:flex;flex-direction:column;gap:8px}
-    #track-title{font-weight:800;font-size:1.05rem;color:var(--fg)}
-    #track-artist{font-size:0.92rem;color:rgba(11,19,32,0.6)}
-    #player-status{font-size:0.87rem;color:rgba(11,19,32,0.55)}
-    #playBtn{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer;box-shadow:0 8px 18px rgba(0,188,212,0.08)}
-    #playBtn:hover{transform:translateY(-1px)}
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-    /* canvas visualizer */
-    #player-canvas{width:100%;height:64px;border-radius:8px;background:linear-gradient(180deg, rgba(11,19,32,0.02), rgba(11,19,32,0.01));margin-top:8px}
+    h2 {
+      font-size: 1.5em;
+      margin-top: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      z-index: 3;
+    }
 
-    /* Social / share / footer */
-    .controls{display:flex;gap:12px;align-items:center;justify-content:flex-end}
-    .social{margin-top:18px;display:flex;gap:18px;justify-content:center}
-    .social a{color:var(--fg);font-size:1.6rem;transition:all .18s}
-    .social a:hover{color:var(--accent);transform:translateY(-4px)}
-    #shareBtn{background:transparent;border:1px solid rgba(11,19,32,0.06);padding:10px 14px;border-radius:8px;cursor:pointer}
-    footer{margin-top:22px;color:rgba(11,19,32,0.55);font-size:0.95rem}
+    /* REPRODUCTOR */
+    .player {
+      margin-top: 20px;
+      width: 85%;
+      max-width: 400px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      z-index: 3;
+    }
 
-    @media (max-width:560px){
-      .logo{width:160px;height:160px}
-      #player-art{width:82px;height:82px}
-      #pro-player{padding:12px}
+    iframe {
+      width: 100%;
+      min-height: 150px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* BOTÓN COMPARTIR */
+    #shareBtn {
+      background: #00aaff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+      z-index: 3;
+    }
+
+    #shareBtn:hover {
+      background: #0088cc;
+    }
+
+    /* REDES SOCIALES — CORREGIDO */
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .social a {
+      color: white !important;
+      font-size: 2.1em;
+      text-decoration: none;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social a:hover {
+      color: #00aaff;
+      transform: scale(1.2);
+    }
+
+    footer {
+      font-size: 0.9em;
+      margin-top: 30px;
+      color: rgba(255,255,255,0.7);
+      z-index: 3;
     }
   </style>
+
+  <!-- ICONOS (corregido, CDN oficial y estable) -->
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- logo: ruta local subida -->
-    <div class="logo" aria-hidden="false">
-      <img src="/mnt/data/AFRadio_logo_512.png" alt="AFRadio logo" id="main-logo">
-    </div>
 
-    <h1>La mejor del mundo</h1>
-    <p class="lead">Escucha AFRadio en vivo — música latina, éxitos y entretenimiento 24/7.</p>
+  <!-- Logo -->
+<img src="AFRadio_logo_512.png" alt="Logo AFRadio" class="logo" />
 
-    <!-- Reproductor Pro -->
-    <section id="pro-player" aria-label="Reproductor AFRadio">
-      <img id="player-art" src="/mnt/data/AFRadio_logo_512.png" alt="Carátula AFRadio">
-      <div id="meta">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-          <div style="min-width:0">
-            <div id="track-title">AFRadio</div>
-            <div id="track-artist">La mejor del mundo</div>
-          </div>
-          <div class="controls">
-            <button id="playBtn" aria-label="Reproducir">▶️ Escuchar</button>
-          </div>
-        </div>
+<!-- Texto SEO oculto (Google sí lo lee, los usuarios no lo ven) -->
+<p style="font-size:0; opacity:0; height:0; overflow:hidden; margin:0; padding:0;">
+  Radio latina online en vivo, música latina, éxitos, emisora por internet, AFRadio.
+</p>
 
-        <div id="player-status">Listo. Pulse ▶ para iniciar reproducción</div>
-        <canvas id="player-canvas" width="640" height="80" role="img" aria-label="Visualizador de audio"></canvas>
-      </div>
+<h2>La mejor del mundo</h2>
 
-      <audio id="radio-audio" preload="none" crossorigin="anonymous"></audio>
-    </section>
-
-    <!-- Compartir y redes -->
-    <div style="display:flex;gap:12px;align-items:center;margin-top:14px;">
-      <button id="shareBtn">🔗 Compartir</button>
-    </div>
-
-    <div class="social" aria-hidden="false">
-      <a href="https://www.facebook.com/afradiolatina" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="https://tiktok.com/@afradiolatina7" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-      <a href="https://www.instagram.com/afradio2022" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://afradio.es/public/afradio/podcasts" target="_blank" title="Podcast"><i class="fas fa-podcast"></i></a>
-    </div>
-
-    <footer>© AFRadio 2025</footer>
+  <div class="player">
+    <iframe src="https://afradio.es/public/afradio/embed?theme=light"
+            allowtransparency="true" loading="lazy"></iframe>
   </div>
 
-  <!-- ================= Reproductor Pro JS ================= -->
+  <button id="shareBtn">🔗 Compartir</button>
+
+  <!-- Redes sociales restauradas -->
+  <div class="social">
+    <a href="https://www.facebook.com/afradiolatina" target="_blank">
+      <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://tiktok.com/@afradiolatina7" target="_blank">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://www.instagram.com/afradio2022" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://afradio.es/public/afradio/podcasts" target="_blank">
+      <i class="fas fa-podcast"></i>
+    </a>
+  </div>
+
+  <footer>© AFRadio 2025</footer>
+
   <script>
-  (function(){
-    const STREAM_URL = "https://afradio.es/listen/afradio/radio.mp3";
-    const METADATA_ENDPOINTS = [
-      "https://afradio.es/api/nowplaying",
-      "https://afradio.es/public/afradio/nowplaying.json",
-      "https://afradio.es/public/afradio/nowplaying"
-    ];
-
-    const audio = document.getElementById("radio-audio");
-    const playBtn = document.getElementById("playBtn");
-    const titleEl = document.getElementById("track-title");
-    const artistEl = document.getElementById("track-artist");
-    const artEl = document.getElementById("player-art");
-    const statusEl = document.getElementById("player-status");
-    const playingDot = document.getElementById("playing-dot");
-
-    // Visualizer
-    const canvas = document.getElementById("player-canvas");
-    const ctx = canvas.getContext("2d");
-    let audioCtx, analyser, sourceNode, rafId;
-    function setupVisualizer(){
-      if (audioCtx) return;
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 128;
-      sourceNode = audioCtx.createMediaElementSource(audio);
-      sourceNode.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      draw();
-    }
-    function draw(){
-      const w = canvas.width = canvas.clientWidth * devicePixelRatio;
-      const h = canvas.height = canvas.clientHeight * devicePixelRatio;
-      const bufferLength = analyser.frequencyBinCount;
-      const data = new Uint8Array(bufferLength);
-      rafId = requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(data);
-      ctx.clearRect(0,0,w,h);
-      const barW = (w / bufferLength) * 1.1;
-      let x = 0;
-      ctx.fillStyle = "rgba(11,19,32,0.9)";
-      for (let i=0;i<bufferLength;i++){
-        const v = data[i]/255;
-        const barH = v * h * 0.9;
-        ctx.fillRect(x, h-barH, barW, barH);
-        x += barW + 2;
-      }
-    }
-    function startVisualizerIfNeeded(){ try{ if(!audioCtx) setupVisualizer(); }catch(e){console.warn(e)} }
-    function stopVisualizer(){ if(rafId) cancelAnimationFrame(rafId); }
-
-    // playback and reconnection
-    let isPlaying = false;
-    let reconnectAttempts = 0;
-    const MAX_RECONNECT = 8;
-
-    function updateUIPlaying(playing){
-      isPlaying = playing;
-      playBtn.textContent = playing ? "⏸ Pausar" : "▶️ Escuchar";
-      statusEl.textContent = playing ? "Conectado: sí" : "Conectado: no";
-      if (playing) startVisualizerIfNeeded(); else stopVisualizer();
-    }
-
-    async function startPlayback(){
-      try{
-        // resume audio context on user gesture
-        if (audioCtx && audioCtx.state === "suspended") await audioCtx.resume();
-        audio.src = STREAM_URL;
-        audio.crossOrigin = "anonymous";
-        audio.preload = "auto";
-        await audio.play();
-        reconnectAttempts = 0;
-        updateUIPlaying(true);
-        fetchMetadataLoop();
-        setMediaSession(titleEl.textContent, artistEl.textContent, artEl.src);
-      }catch(err){
-        console.warn("Play failed:", err);
-        updateUIPlaying(false);
-        scheduleReconnect();
-      }
-    }
-
-    function pausePlayback(){
-      try{ audio.pause(); updateUIPlaying(false); }catch(e){ console.warn(e); }
-    }
-
-    function scheduleReconnect(){
-      reconnectAttempts++;
-      if (reconnectAttempts > MAX_RECONNECT){
-        statusEl.textContent = "Desconectado (reintentos agotados). Pulse ▶ para intentar de nuevo.";
-        return;
-      }
-      const wait = Math.min(30000, 1000 * Math.pow(1.8, reconnectAttempts));
-      statusEl.textContent = `Reconectando en ${Math.round(wait/1000)}s... (intento ${reconnectAttempts})`;
-      setTimeout(()=> startPlayback(), wait);
-    }
-
-    audio.addEventListener("playing", ()=> updateUIPlaying(true));
-    audio.addEventListener("pause", ()=> updateUIPlaying(false));
-    audio.addEventListener("error", (e)=> { console.warn("Audio error", e); updateUIPlaying(false); scheduleReconnect(); });
-    audio.addEventListener("stalled", ()=> { console.warn("Audio stalled"); updateUIPlaying(false); scheduleReconnect(); });
-    audio.addEventListener("ended", ()=> { console.warn("Audio ended"); updateUIPlaying(false); scheduleReconnect(); });
-
-    playBtn.addEventListener("click", async ()=> {
-      if (!isPlaying) await startPlayback();
-      else pausePlayback();
+    // Splash
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      if (splash) setTimeout(() => splash.style.display = "none", 2500);
     });
 
-    // metadata fetching
-    let metadataTimer = null;
-    async function fetchMetadataOnce(){
-      for (const url of METADATA_ENDPOINTS){
-        try{
-          const res = await fetch(url, {cache: "no-store"});
-          if (!res.ok) continue;
-          const data = await res.json();
-          let title=null, artist=null, art=null;
-          if (data && data.now_playing){
-            const np = data.now_playing;
-            if (np.song && np.song.title) title = np.song.title;
-            if (np.song && np.song.artist) artist = np.song.artist;
-            if (np.song && np.song.art) art = np.song.art;
-            if (!title && np.current && np.current.title) title = np.current.title;
+    // Compartir
+    const shareBtn = document.getElementById("shareBtn");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", async () => {
+        const data = {
+          title: "AFRadio",
+          text: "Escucha AFRadio - la mejor del mundo",
+          url: "https://jairoacosta-creator.github.io/Afradio/"
+        };
+        try {
+          if (navigator.share) await navigator.share(data);
+          else {
+            await navigator.clipboard.writeText(data.url);
+            alert("🔗 Enlace copiado");
           }
-          if (!title && data.title) title = data.title;
-          if (!artist && data.artist) artist = data.artist;
-          if (title || artist || art) return {title,artist,art};
-        }catch(e){}
-      }
-      return null;
+        } catch (e) { console.log(e); }
+      });
     }
 
-    async function fetchMetadataLoop(){
-      if (metadataTimer) return;
-      async function tick(){
-        try{
-          const m = await fetchMetadataOnce();
-          if (m) applyMetadata(m);
-        }catch(e){console.warn("metadata loop", e)}
-        metadataTimer = setTimeout(tick, 8000);
-      }
-      tick();
+    // Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("SW Registrado"))
+        .catch(err => console.log("SW Error:", err));
     }
-
-    function applyMetadata(m){
-      if (!m) return;
-      if (m.title) titleEl.textContent = m.title;
-      if (m.artist) artistEl.textContent = m.artist;
-      if (m.art) artEl.src = m.art;
-      setMediaSession(titleEl.textContent, artistEl.textContent, artEl.src);
-    }
-
-    // media session
-    function setMediaSession(title, artist, artwork){
-      try{
-        if ("mediaSession" in navigator){
-          navigator.mediaSession.metadata = new MediaMetadata({
-            title: title || "AFRadio",
-            artist: artist || "AFRadio",
-            album: "AFRadio",
-            artwork: [{ src: artwork || artEl.src, sizes: "512x512", type: "image/png" }]
-          });
-          navigator.mediaSession.setActionHandler("play", ()=> startPlayback());
-          navigator.mediaSession.setActionHandler("pause", ()=> pausePlayback());
-          navigator.mediaSession.setActionHandler("stop", ()=> pausePlayback());
-        }
-      }catch(e){ console.warn("MediaSession error", e); }
-    }
-
-    // init UI
-    statusEl.textContent = "Listo. Pulse ▶ para iniciar reproducción";
-    titleEl.textContent = "AFRadio";
-    artistEl.textContent = "La mejor del mundo";
-
-    // expose for debug
-    window.afradio_play = startPlayback;
-
-  })();
   </script>
-
-  <!-- Compartir -->
-  <script>
-    document.getElementById("shareBtn").addEventListener("click", async ()=>{
-      const data = {
-        title: "AFRadio",
-        text: "Escucha AFRadio - La mejor del mundo",
-        url: "https://jairoacosta-creator.github.io/Afradio/"
-      };
-      try{
-        if (navigator.share) await navigator.share(data);
-        else {
-          await navigator.clipboard.writeText(data.url);
-          alert("Enlace copiado al portapapeles");
-        }
-      }catch(e){ console.warn(e) }
-    });
-  </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
