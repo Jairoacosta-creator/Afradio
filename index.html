@@ -109,24 +109,25 @@ body {
 }
 
     /* Halo detrás del logo */
-    body::before {
-      content: "";
-      position: fixed;
-      left: 50%;
-      top: 12%;
-      transform: translateX(-50%);
-      width: 90vw;
-      max-width: 900px;
-      height: 420px;
-      pointer-events: none;
-      background: radial-gradient(ellipse at center,
-                  rgba(10,23,78,0.75) 0%,
-                  rgba(10,23,78,0.55) 30%,
-                  rgba(8,35,80,0.15) 55%,
-                  rgba(8,35,80,0) 80%);
-      filter: blur(18px);
-      z-index: 0;
-    }
+  body::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 12%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 900px;
+  height: 420px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+              rgba(255,255,255,0.40) 0%,
+              rgba(255,255,255,0.20) 35%,
+              rgba(255,255,255,0.05) 70%,
+              transparent 90%);
+  filter: blur(22px);
+  z-index: 0;
+}
+
 
     /* LOGO (centrado y más grande) */
     .logo {
@@ -303,6 +304,7 @@ body {
   </script>
 </body>
 </html>
+
 
 
 
