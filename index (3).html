@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AFRadio - Radio Latina Online en Vivo | Música, Éxitos y Entretenimiento</title>
+  <meta name="theme-color" content="#1c3f66" />
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- ⭐ SEO (esto sí va aquí) -->
+  <meta name="description" content="Escucha AFRadio en vivo. Música latina, éxitos, entretenimiento, programación en directo y lo mejor de la radio online. Disponible en Android y iPhone.">
+  <meta name="keywords" content="radio online, escuchar radio, AFRadio, afradiolatina, música latina, radio en vivo, emisora online, radio por internet">
+  <meta name="author" content="AFRadio">
+
+  <!-- SEO para compartir en redes -->
+  <meta property="og:title" content="AFRadio - La mejor del mundo">
+  <meta property="og:description" content="Escucha AFRadio en vivo desde tu móvil o navegador. Música, entretenimiento y lo mejor de la programación.">
+  <meta property="og:image" content="AFRadio_logo_512.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jairoacosta-creator.github.io/Afradio/">
+
+  <!-- Para iPhone -->
+  <meta name="apple-mobile-web-app-title" content="AFRadio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- ICONOS (correcto) -->
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RadioStation",
+  "name": "AFRadio",
+  "url": "https://jairoacosta-creator.github.io/Afradio/",
+  "logo": "https://jairoacosta-creator.github.io/Afradio/AFRadio_logo_512.png",
+  "image": "https://jairoacosta-creator.github.io/Afradio/AFRadio_logo_512.png",
+  "description": "AFRadio - Radio latina online en vivo. Música latina, éxitos, entretenimiento y programación 24/7.",
+  "sameAs": [
+    "https://www.facebook.com/afradiolatina",
+    "https://www.instagram.com/afradio2022",
+    "https://tiktok.com/@afradiolatina7",
+    "https://afradio.es/public/afradio/podcasts"
+  ],
+  "broadcastFrequency": "Online",
+  "broadcastTimezone": "Europe/Madrid",
+  "areaServed": "Worldwide"
+}
+</script>
+
+  <style>
+    /* FONDO AZUL METÁLICO ANIMADO */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #8ea4ad, #488eab, #11b5f2);
+  background-size: 300% 300%;
+  animation: metallicMove 12s ease-in-out infinite;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  text-align: center;
+  overflow-x: hidden;
+  padding-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Brillo muy suave que recorre el fondo */
+@keyframes metallicMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* Brillo suave detrás del logo */
+.logo-glow {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-glow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+              rgba(255,255,255,0.65) 0%,
+              rgba(255,255,255,0.45) 30%,
+              rgba(255,255,255,0.20) 60%,
+              rgba(255,255,255,0.10) 75%,
+              transparent 90%);
+  filter: blur(25px);
+  z-index: 0;
+  border-radius: 50%;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+/* Animación suave de respiración */
+@keyframes glowPulse {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.90; }
+  100% { opacity: 0.55; }
+}
+
+    /* Halo detrás del logo */
+  body::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 12%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 900px;
+  height: 420px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+              rgba(255,255,255,0.40) 0%,
+              rgba(255,255,255,0.20) 35%,
+              rgba(255,255,255,0.05) 70%,
+              transparent 90%);
+  filter: blur(22px);
+  z-index: 0;
+}
+
+
+    /* LOGO (centrado y más grande) */
+    .logo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      animation: spin 12s linear infinite;
+      margin-top: 12px;
+      z-index: 2;
+      position: relative;
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.45),
+        0 0 40px rgba(0,170,255,0.12),
+        inset 0 -6px 20px rgba(0,0,0,0.25);
+      transition: transform 220ms ease;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-top: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      z-index: 3;
+    }
+
+    /* REPRODUCTOR */
+    .player {
+      margin-top: 20px;
+      width: 85%;
+      max-width: 400px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      z-index: 3;
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 150px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* BOTÓN COMPARTIR */
+    #shareBtn {
+      background: #00aaff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s;
+      z-index: 3;
+    }
+
+    #shareBtn:hover {
+      background: #0088cc;
+    }
+
+    /* REDES SOCIALES — CORREGIDO */
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .social a {
+      color: white !important;
+      font-size: 2.1em;
+      text-decoration: none;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .social a:hover {
+      color: #00aaff;
+      transform: scale(1.2);
+    }
+
+    footer {
+      font-size: 0.9em;
+      margin-top: 30px;
+      color: rgba(255,255,255,0.7);
+      z-index: 3;
+    }
+  </style>
+
+  <!-- ICONOS (corregido, CDN oficial y estable) -->
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- Logo -->
+<div class="logo-glow">
+  <img src="AFRadio_logo_512.png" alt="Logo AFRadio" class="logo" />
+</div>
+
+
+<!-- Texto SEO oculto (Google sí lo lee, los usuarios no lo ven) -->
+<p style="font-size:0; opacity:0; height:0; overflow:hidden; margin:0; padding:0;">
+  Radio latina online en vivo, música latina, éxitos, emisora por internet, AFRadio.
+</p>
+
+<h2>La mejor del mundo</h2>
+
+  <div class="player">
+    <iframe src="https://afradio.es/public/afradio/embed?theme=light"
+            allowtransparency="true" loading="lazy"></iframe>
+  </div>
+
+  <button id="shareBtn">🔗 Compartir</button>
+
+  <!-- Redes sociales restauradas -->
+  <div class="social">
+    <a href="https://www.facebook.com/afradiolatina" target="_blank">
+      <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://tiktok.com/@afradiolatina7" target="_blank">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://www.instagram.com/afradio2022" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://afradio.es/public/afradio/podcasts" target="_blank">
+      <i class="fas fa-podcast"></i>
+    </a>
+  </div>
+
+  <footer>© AFRadio 2025</footer>
+
+  <script>
+    // Splash
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      if (splash) setTimeout(() => splash.style.display = "none", 2500);
+    });
+
+    // Compartir
+    const shareBtn = document.getElementById("shareBtn");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", async () => {
+        const data = {
+          title: "AFRadio",
+          text: "Escucha AFRadio - la mejor del mundo",
+          url: "https://jairoacosta-creator.github.io/Afradio/"
+        };
+        try {
+          if (navigator.share) await navigator.share(data);
+          else {
+            await navigator.clipboard.writeText(data.url);
+            alert("🔗 Enlace copiado");
+          }
+        } catch (e) { console.log(e); }
+      });
+    }
+
+    // Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("SW Registrado"))
+        .catch(err => console.log("SW Error:", err));
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
