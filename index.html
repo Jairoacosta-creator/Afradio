@@ -85,9 +85,60 @@ audio {
 
 .social {
   display: flex;
-  justify-
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
 
+.social a {
+  color: white;
+  font-size: 2em;
+}
+</style>
+</head>
 
+<body>
 
+<img src="AFRadio_logo_512.png" class="logo" alt="AFRadio">
 
+<h2>La mejor del mundo</h2>
 
+<!-- ✅ REPRODUCTOR CORREGIDO -->
+<div class="player">
+  <audio id="radioPlayer" controls preload="none">
+    <source src="https://afradio.es/listen/afradio/radio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio en vivo.
+  </audio>
+
+  <button id="playBtn">▶ Reproducir</button>
+</div>
+
+<div class="social">
+  <a href="https://www.facebook.com/afradiolatina" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://tiktok.com/@afradiolatina7" target="_blank"><i class="fab fa-tiktok"></i></a>
+  <a href="https://www.instagram.com/afradio2022" target="_blank"><i class="fab fa-instagram"></i></a>
+</div>
+
+<footer>© AFRadio 2025</footer>
+
+<script>
+const player = document.getElementById("radioPlayer");
+const btn = document.getElementById("playBtn");
+
+btn.addEventListener("click", async () => {
+  try {
+    await player.play();
+    btn.textContent = "⏸ Reproduciendo";
+  } catch (e) {
+    alert("Pulsa nuevamente para iniciar la radio");
+  }
+});
+
+// Service Worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+</body>
+</html>
