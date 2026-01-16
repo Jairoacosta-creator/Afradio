@@ -221,7 +221,40 @@ body {
       color: rgba(255,255,255,0.7);
       z-index: 3;
     }
+   .custom-player {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.player-info {
+  text-align: left;
+}
+
+.play-btn {
+  background: #00aaff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px;
+  font-size: 1.2em;
+  color: white;
+  cursor: pointer;
+}
+
   </style>
+
 
   <!-- ICONOS (corregido, CDN oficial y estable) -->
   <link rel="stylesheet" 
@@ -240,14 +273,21 @@ body {
 
 <h2>La mejor del mundo</h2>
 
-  <div class="player">
-  <button id="playRadio">▶ Reproducir AFRadio</button>
+  <div class="player custom-player">
+  <div class="player-header">
+    <img src="AFRadio_logo_512.png" class="player-logo" alt="AFRadio">
+    <div class="player-info">
+      <strong>AFRadio</strong>
+      <span id="meta">En vivo</span>
+    </div>
+  </div>
 
-  <audio id="radio" playsinline preload="none">
+  <button id="playRadio" class="play-btn">▶</button>
+
+  <audio id="radio" playsinline>
     <source src="https://afradio.es/listen/afradio/radio.mp3" type="audio/mpeg">
   </audio>
 </div>
-
 
   <button id="shareBtn">🔗 Compartir</button>
 
@@ -327,11 +367,27 @@ playBtn.addEventListener("click", async () => {
     alert("Pulsa nuevamente para activar el audio");
   }
 });
+const radio = document.getElementById("radio");
+const playBtn = document.getElementById("playRadio");
+const meta = document.getElementById("meta");
+
+playBtn.addEventListener("click", async () => {
+  if (radio.paused) {
+    await radio.play();
+    playBtn.textContent = "⏸";
+    meta.textContent = "Reproduciendo en vivo";
+  } else {
+    radio.pause();
+    playBtn.textContent = "▶";
+    meta.textContent = "Pausado";
+  }
+});
 
 
   </script>
 </body>
 </html>
+
 
 
 
