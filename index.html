@@ -301,8 +301,37 @@ body {
         .then(() => console.log("SW Registrado"))
         .catch(err => console.log("SW Error:", err));
     }
+
+/* ...tu código existente... */
+
+const radio = document.getElementById("radio");
+const playBtn = document.getElementById("playRadio");
+
+let iniciado = false;
+
+playBtn.addEventListener("click", async () => {
+  try {
+    if (!iniciado) {
+      radio.load();
+      iniciado = true;
+    }
+
+    if (radio.paused) {
+      await radio.play();
+      playBtn.textContent = "⏸ En vivo";
+    } else {
+      radio.pause();
+      playBtn.textContent = "▶ Reproducir AFRadio";
+    }
+  } catch (e) {
+    alert("Pulsa nuevamente para activar el audio");
+  }
+});
+
+
   </script>
 </body>
 </html>
+
 
 
