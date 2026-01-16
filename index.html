@@ -241,9 +241,13 @@ body {
 <h2>La mejor del mundo</h2>
 
   <div class="player">
-    <iframe src="https://afradio.es/public/afradio/embed?theme=light"
-            allowtransparency="true" loading="lazy"></iframe>
-  </div>
+  <button id="playRadio">▶ Reproducir AFRadio</button>
+
+  <audio id="radio" playsinline preload="none">
+    <source src="https://afradio.es/listen/afradio/radio.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
 
   <button id="shareBtn">🔗 Compartir</button>
 
@@ -300,4 +304,5 @@ body {
   </script>
 </body>
 </html>
+
 
