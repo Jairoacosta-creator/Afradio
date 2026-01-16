@@ -284,7 +284,7 @@ body {
 
   <button id="playRadio" class="play-btn">▶</button>
 
-  <audio id="radio" playsinline>
+  <audio id="radio" playsinline preload="none">
     <source src="https://afradio.es/listen/afradio/radio.mp3" type="audio/mpeg">
   </audio>
 </div>
@@ -344,49 +344,41 @@ body {
 
 /* ...tu código existente... */
 
-const radio = document.getElementById("radio");
-const playBtn = document.getElementById("playRadio");
+ const radio = document.getElementById("radio");
+  const playBtn = document.getElementById("playRadio");
+  const meta = document.getElementById("meta");
 
-let iniciado = false;
+  let started = false;
 
-playBtn.addEventListener("click", async () => {
-  try {
-    if (!iniciado) {
-      radio.load();
-      iniciado = true;
-    }
+  if (playBtn && radio) {
+    playBtn.addEventListener("click", async () => {
+      try {
+        if (!started) {
+          radio.load();
+          started = true;
+        }
 
-    if (radio.paused) {
-      await radio.play();
-      playBtn.textContent = "⏸ En vivo";
-    } else {
-      radio.pause();
-      playBtn.textContent = "▶ Reproducir AFRadio";
-    }
-  } catch (e) {
-    alert("Pulsa nuevamente para activar el audio");
+        if (radio.paused) {
+          await radio.play();
+          playBtn.textContent = "⏸";
+          if (meta) meta.textContent = "AFRadio en vivo";
+        } else {
+          radio.pause();
+          playBtn.textContent = "▶";
+          if (meta) meta.textContent = "Pausado";
+        }
+      } catch (err) {
+        alert("Pulsa nuevamente para activar el audio");
+        console.error(err);
+      }
+    });
   }
-});
-const radio = document.getElementById("radio");
-const playBtn = document.getElementById("playRadio");
-const meta = document.getElementById("meta");
-
-playBtn.addEventListener("click", async () => {
-  if (radio.paused) {
-    await radio.play();
-    playBtn.textContent = "⏸";
-    meta.textContent = "Reproduciendo en vivo";
-  } else {
-    radio.pause();
-    playBtn.textContent = "▶";
-    meta.textContent = "Pausado";
-  }
-});
 
 
   </script>
 </body>
 </html>
+
 
 
 
